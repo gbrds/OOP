@@ -51,8 +51,10 @@ class Rectangle extends Shape {
     }
 }
 
-const shapes = [new Circle(5), new Square(4), new Rectangle(4, 6)];
-console.log()
+const shapes = [new Circle("red", 5), new Square("blue", 4), new Rectangle("green", 4, 6)];
+shapes.forEach(shape => {
+    console.log(`${shape.print()} has an area of ${shape.getArea()}`)
+})
 
 /*class Shape {
     constructor(name) {
