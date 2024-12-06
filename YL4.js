@@ -51,42 +51,46 @@ class Rectangle extends Shape {
     }
 }
 
-const shapes = [new Circle("red", 5), new Square("blue", 4), new Rectangle("green", 4, 6)];
-shapes.forEach(shape => {
-    console.log(`${shape.print()} has an area of ${shape.getArea()}`)
-})
-
-/*class Shape {
-    constructor(name) {
-        if (new.target === Shape) {
-            throw new Error('Cannot instantiate abstract class')
-        }
-        this.name = name;
+class Paint {
+    constructor(){
+        this.shapes = [];
+    }
+    addShape(shape) {
+        this.shapes.push(shape);
+    }
+    getShape() {
+        return this.shapes;
+    }
+    
+    calculateTotalArea() {
+        return this.shapes.reduce((total, shape) => total + shape.getArea(), 0);
+    }
+    
+    getCircles() {
+        return this.shapes.filter(shape => shape instanceof Circle);
+    }
+    
+    getSquare() {
+        return this.shapes.filter(shape => shape instanceof Square);
+    }
+    
+    getRectangle() {
+        return this.shapes.filter(shape => shape instanceof Rectangle);
     }
 }
 
-class Circle extends Shape {
-    constructor(radius) {
-        super('Circle')
-        this.radius = radius;
-    }
-    area() {
-        return Math.PI * this.radius ** 2;
-    }
-}
+const paintApp = new Paint();
+paintApp.addShape(new Circle("red", 5));
+paintApp.addShape(new Square("blue", 4));
+paintApp.addShape(new Rectangle("green", 4, 5));
 
-class Rectangle extends Shape {
-    constructor(width, height) {
-        super('Rectangle')
-        this.width = width;
-        this.height = height;
-    }
-    area() {
-        return this.width * this.height;
-    }
-}
-
-const shapes = [new Circle(5), new Rectangle(4, 6)];
-shapes.forEach(shape => {
-    console.log(`${shape.name} Area: ${shape.area()}`);
-}) */
+console.log("All shapes");
+console.log(paintApp.getShape().map(shape => shape.print()));
+console.log("/nTotal Area");
+console.log(paintApp.calculateTotalArea());
+console.log("/nCircles");
+console.log(paintApp.getCircles().map(circle = circle => circle.print()));
+console.log("/nSquares");
+console.log(paintApp.getSquare().map(square = square => square.print()));
+console.log("/nRectangle");
+console.log(paintApp.getRectangle().map(rectangle = rectangle => rectangle.print()));
